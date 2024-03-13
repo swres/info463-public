@@ -41,8 +41,6 @@ let r = 200;
 let b = 200;
 let g = 200;
 
-let screenWidth = window.screen.width / 2;
-let screenHeight = 400;
 let maxSize = 80;
 let minSize = 10;
 let maxDist = 240;
