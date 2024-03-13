@@ -6,14 +6,12 @@ import Button from '@mui/material/Button';
 import { useState } from 'react';
 import Slider from '@mui/material/Slider';
 import { mkConfig, generateCsv, download } from "export-to-csv";
+import ahoy from './ahoy.jpg'
 
 export default function Secret() {
   return (
     <main className={styles.main}>
-      <div className={styles.card}>
-        <h2>You found the secret page!</h2>
-        <p>:)</p>
-      </div>
+       <img src={ahoy.src} alt="An image of Mr. Krabs from Spongebob saying Ahoy matey, ye made it to the secret page."/>
     </main>
   );
 }
