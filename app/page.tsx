@@ -37,7 +37,7 @@ export default function Home() {
           <h2>
             Lab 1 <span>-&gt;</span>
           </h2>
-          <p>Introduction</p>
+          <p>Affordances</p>
         </a>
 
         <a
