@@ -49,7 +49,7 @@ export default function Home() {
           <h2>
             Lab 2 <span>-&gt;</span>
           </h2>
-          <p>A Fitts' law experiment</p>
+          <p>A Fitts law experiment</p>
         </a>
 
         <a
