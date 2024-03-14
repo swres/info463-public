@@ -22,20 +22,13 @@ export default function Lab3() {
         <p>Once you've done that, answer the following questions:</p>
         <ol>
           <li>Which two devices (or sensitivities, or hands, etc) did you pick?</li>
-          <li>How did your results compare between the two? Consider throughput (speed) and accuracy for both pointing and steering tasks.</li>
+          <li>How did your results compare between the two? Consider throughput (speed) and accuracy/error rate for both pointing and steering tasks.</li>
           <li>Pick <b>at least one</b> additional variable you might test when comparing pointing devices (that is, something besides speed or accuracy). How might you test it?</li>
         </ol>
-        <br></br>
-        <p>To conduct the experiment, set up the parameters below, then click "begin experiment." You will alternate between clicking a 
-          square in the top-left corner, and a target. Try to click the targets as fast as you can. There is no penalty for inaccuracy.
-          When you're done, you'll have the option to download a CSV of your data. 
-        </p>
       </div>
       <br></br>
       <h2>Fitts' Law Experiment</h2>
       {FittsExperiment()}
-      <br></br>
-      <h2>Accuracy Experiment</h2>
       <br></br>
       <h2>Steering Experiment</h2>
       {SteeringExperiment()}
@@ -50,7 +43,7 @@ let g = 200;
 
 let maxSize = 60;
 let minSize = 10;
-let maxDist = 240;
+let maxDist = 350;
 let minDist = 30
 
 let numTrials = 25;
@@ -63,21 +56,27 @@ function FittsResults() {
   let buckets = new Map();
   let highest_bucket = 0
   let highest_seconds = 0
+  let num_errors = 0
+
   for (let i = 0; i < dataRows.length; i++){
     let datum = dataRows[i];
-    let bucket = (Math.floor(2*datum["ID"])/2).toFixed(2);
-    if (highest_bucket < Number(bucket)){
-      highest_bucket = Number(bucket);
-    }
-    if (highest_seconds < datum["seconds"]){
-      highest_seconds = datum["seconds"]
-    }
-    if (buckets.has(bucket)){
-      let buck_list = buckets.get(bucket)
-      buck_list.push(datum["seconds"])
-      buckets.set(bucket, buck_list)
+    if (datum["error"] == 0){
+      let bucket = (Math.floor(2*datum["ID"])/2).toFixed(2);
+      if (highest_bucket < Number(bucket)){
+        highest_bucket = Number(bucket);
+      }
+      if (highest_seconds < datum["seconds"]){
+        highest_seconds = datum["seconds"]
+      }
+      if (buckets.has(bucket)){
+        let buck_list = buckets.get(bucket)
+        buck_list.push(datum["seconds"])
+        buckets.set(bucket, buck_list)
+      } else {
+        buckets.set(bucket, [datum["seconds"]])
+      }
     } else {
-      buckets.set(bucket, [datum["seconds"]])
+      num_errors += 1
     }
   }
   let lrx: number[] = []
@@ -115,6 +114,8 @@ function FittsResults() {
   let line_data = [{x: 0, y: lr_intercept}, 
                    {x: highest_bucket, y: (lr_slope*highest_bucket + lr_intercept)}]
 
+  //Please be aware! I'm doing something very stupid here. Because of how I'm handling clicks when calculating errors, 
+  //I have to subtract the number of trials from the number of errors, because of duplicate rows
   return (
     <div>
       <VictoryChart>
@@ -131,6 +132,7 @@ function FittsResults() {
         <li><b>Delay (a):</b> {lr_intercept}</li>
         <li><b>Acceleration (b):</b> {lr_slope}</li>
         <li><b>R^2:</b> {lr_r2}</li>
+        <li><b>Number of errors:</b> {num_errors-numTrials}</li>
       </ul>
     </div>
   )
@@ -155,7 +157,21 @@ function FittsExperiment() {
       let start = Date.now();
       return (
         <div style = {{justifyContent: 'center', width: '600px'}}>
-          <div style={{display: 'inline-block', width: '100%', height: '500px', background: `rgb(${r},${g},${b})`, position: 'relative'}}>
+          <p>Trial {curTrial} out of {numTrials}</p>
+          <div style={{display: 'inline-block', width: '100%', height: '500px', background: `rgb(${r},${g},${b})`, position: 'relative'}}
+          onClick={() => {
+            //need to make sure no duplicate recording happening 
+            if(trial){ 
+              setTrial(false);
+              dataRows.push({width: size,
+                           distance: Math.sqrt((left^2) + (top^2)),
+                           seconds: (Date.now()-start)/1000,
+                           ID: Math.log2((2*Math.sqrt((left ** 2) + (top ** 2)))/size),
+                           error: 1}
+                           )
+            }
+          }}
+          >
             <div style = {{position: 'absolute',  width: `${size}px`, height: `${size}px`, left: `${left}px`, top:`${top}px`, background: 'black'}} 
             onClick={() => {
               curTrial += 1;
@@ -163,7 +179,8 @@ function FittsExperiment() {
               dataRows.push({width: size,
                              distance: Math.sqrt((left^2) + (top^2)),
                              seconds: (Date.now()-start)/1000,
-                             ID: Math.log2((2*Math.sqrt((left ** 2) + (top ** 2)))/size)}
+                             ID: Math.log2((2*Math.sqrt((left ** 2) + (top ** 2)))/size),
+                             error: 0}
                              )
             }}
             >
@@ -174,10 +191,10 @@ function FittsExperiment() {
     } else {
       //Are we finished all the trials? If not, keep going!
       if (curTrial < numTrials) {
-        console.log("here")
         //Return reset screen
         return (
         <div style = {{justifyContent: 'center', width: '600px'}}>
+          <p>Trial {curTrial} out of {numTrials}</p>
           <div style={{display: 'inline-block', width: '100%', height: '500px', background: `rgb(${r},${g},${b}, ${alpha})`, position: 'relative'}}>
             <div style = {{position: 'absolute',  width: `25px`, height: `25px`, background: 'black'}} 
             onClick={() => {
@@ -329,7 +346,7 @@ function SteeringResults() {
         <li><b>Delay (a):</b> {lr_intercept}</li>
         <li><b>Acceleration (b):</b> {lr_slope}</li>
         <li><b>R^2:</b> {lr_r2}</li>
-        <><b>Number of errors:</b> {num_errors}</>
+        <li><b>Number of errors:</b> {num_errors}</li>
       </ul>
     </div>
   )
