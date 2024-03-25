@@ -46,7 +46,7 @@ let minSize = 10;
 let maxDist = 350;
 let minDist = 30
 
-let numTrials = 25;
+let numTrials = 50;
 let curTrial = 0;
 
 let dataRows : any[] = [];
@@ -256,11 +256,11 @@ function FittsExperiment() {
 
 //Accuracy Experiment
 let minPathWidth = 10 
-let maxPathWidth = 80
+let maxPathWidth = 60
 let minPathLength = 200
 let maxPathLength = 550
 
-let steerTrials = 25 
+let steerTrials = 50
 let curSteerTrial = 0
 
 let steeringRows : any[] = [];
@@ -369,6 +369,7 @@ function SteeringExperiment() {
       console.log(width)
       return (
         <div style = {{justifyContent: 'center', width: '600px'}}>
+          <p>Trial {curSteerTrial} out of {steerTrials}</p>
           <div style={{display: 'flex', alignItems: 'center', width: '100%', height: '500px', background: `rgb(${r},${g},${b})`, position: 'relative'}}>
             <div style = {{position: 'relative',  width: `${length}px`, height: `${width}px`, background: 'blue'}} 
             onMouseLeave={() => {
@@ -403,6 +404,7 @@ function SteeringExperiment() {
         //Return reset screen
         return (
         <div style = {{justifyContent: 'center', width: '600px'}}>
+          <p>Trial {curSteerTrial} out of {steerTrials}</p>
           <div style={{display: 'flex', alignItems: 'center', width: '100%', height: '500px', background: `rgb(${r},${g},${b}, ${alpha})`, position: 'relative'}}>
             <div style = {{position: 'relative',  width: `${minPathWidth}px`, height: `${minPathWidth}px`, verticalAlign: "middle", background: 'black'}} 
             onClick={() => {

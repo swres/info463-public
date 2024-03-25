@@ -16,13 +16,13 @@ export default function Lab2() {
         <p>In this week's lab, you will be testing out Fitts' law for yourself. Your task is to do the following:</p>
         <ol>
           <li>Set up and conduct your own Fitts' law experiment. Take note of the pattern of results you get.</li>
-          <li>Modify the experiment in some way (e.g. make the range of sizes wider, change the alpha, use a different pointing device (e.g. a mouse vs. trackpad), etc).</li>
+          <li>Modify the experiment in some way (e.g. make the range of sizes wider, use a different pointing device (e.g. a mouse vs. trackpad), etc).</li>
         </ol>
         <br></br>
         <p>Once you've done that, answer the following questions:</p>
         <ol>
           <li>How robust is Fitt's law? That is, does it accurately predict the data you collected today?</li>
-          <li>What other variables did you change, and how (if at all) did it affect the results of the experiment?</li>
+          <li>What other variables did you change, and how (if at all) did it affect the results of the experiment? Why do you think that is?</li>
         </ol>
         <br></br>
         <p>To conduct the experiment, set up the parameters below, then click "begin experiment." You will alternate between clicking a 
