@@ -15,14 +15,18 @@ export default function Lab2() {
         <h2>Lab 2: Fitts' Law</h2>
         <p>In this week's lab, you will be testing out Fitts' law for yourself. Your task is to do the following:</p>
         <ol>
-          <li>Set up and conduct your own Fitts' law experiment. Take note of the pattern of results you get.</li>
-          <li>Modify the experiment in some way (e.g. make the range of sizes wider, use a different pointing device (e.g. a mouse vs. trackpad), etc).</li>
+          <li>Conduct your own Fitts' law experiment, using whichever pointing device you normally use. Take note of the pattern of results you get.</li>
+          <li>Try it two more times, but this time with a different pointing device (for example, you might use a mouse vs. a trackpad vs. a touch screen). If you don't have access to three different
+            pointing devices, you can adjust the sensitivity setting on your machine instead. 
+          </li>
         </ol>
         <br></br>
         <p>Once you've done that, answer the following questions:</p>
         <ol>
-          <li>How robust is Fitt's law? That is, does it accurately predict the data you collected today?</li>
-          <li>What other variables did you change, and how (if at all) did it affect the results of the experiment? Why do you think that is?</li>
+          <li>Describe the data you got from each of the three devices you tested. What does each term in the equation mean, and how can you use them to interpret 
+            the throughput of your pointing devices?
+          </li>
+          <li>Can you determine which pointing device is <i>best</i> based on your results today? Why or why not?</li>
         </ol>
         <br></br>
         <p>To conduct the experiment, set up the parameters below, then click "begin experiment." You will alternate between clicking a 
@@ -46,6 +50,9 @@ let minSize = 10;
 let maxDist = 240;
 let minDist = 30
 
+let globalSizes = [20, 40, 80]
+let globalDists = [50, 200, 400]
+
 let numTrials = 25;
 let curTrial = 0;
 
@@ -57,6 +64,7 @@ function ExpOptions(){
     setSizes(newValue as number[]);
     minSize = sizes[0];
     maxSize = sizes[1];
+    globalSizes = newValue as number[];
   };
 
   const [dists, setDists] = useState([30,240])
@@ -72,7 +80,21 @@ function ExpOptions(){
     setNumTrials(newValue as number);
     numTrials = (newValue as number);
   }
-
+  return (
+    <div>
+      <h3>Number of trials</h3>
+      <Box sx={{ width: 300 }}>
+      <Slider
+        getAriaLabel={() => 'Number of trials'}
+        value={numberTrials}
+        onChange={handleNumTrials}
+        valueLabelDisplay="auto"
+      />
+    </Box>
+    <p>Trial {curTrial} out of {numTrials}</p>
+    </div>
+  )
+  /*
   return (
     <div>
       <h3>Size range for targets</h3>
@@ -119,7 +141,7 @@ function ExpOptions(){
     <p>Trial {curTrial} out of {numTrials}</p>
     <>Distance range: {minDist} to {maxDist}</>
     </div>
-  )
+  )*/
 }
 
 function Results() {
@@ -190,12 +212,10 @@ function Results() {
       <p>Fitts' Law says that movement time (MT) is a combination of target distance (D) and width (W), as specified 
         by the following formula: MT = a + b*ID, where ID = log(2D/W). R^2 is a measure of the linearity of a regression,
         and in this case refers to how closely your results follow Fitts' Law.</p>
-      <p>According to your data, the parameters for your input device are:</p>
-      <ul>
-        <li><b>Delay:</b> {lr_intercept}</li>
-        <li><b>Acceleration:</b> {lr_slope}</li>
-        <li><b>R^2:</b> {lr_r2}</li>
-      </ul>
+      <br></br>
+      <p>According to your data, your Fitts' law regression is:</p>
+      <p>MT = {lr_intercept.toFixed(2)} + {lr_slope.toFixed(2)}ID</p>
+      <p>Your R^2 was {lr_r2.toFixed(2)}</p>
     </div>
   )
 }
@@ -208,9 +228,11 @@ function Experiment() {
     //Are we in a trial?
     if (trial){
       //Random size
-      let size = Math.max(minSize, (Math.random() * maxSize));
+      //let size = Math.max(minSize, (Math.random() * maxSize));
+      let size = globalSizes[Math.floor(Math.random()*globalSizes.length)];
       //Random location
-      let dist = Math.random()*(maxDist - minDist) + minDist
+      //let dist = Math.random()*(maxDist - minDist) + minDist
+      let dist = globalDists[Math.floor(Math.random()*globalDists.length)];
       //let left = Math.max(5 + size, ((Math.random() * dist)));
       let left = (Math.random() * dist);
       //let top = Math.max(5 + size, ((Math.random() * screenHeight) - size));
