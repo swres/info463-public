@@ -300,7 +300,7 @@ function Results() {
   }
   return (
     <div>
-      <p><b>Total time:</b> {total_time}</p>
+      <p><b>Total time:</b> {total_time} seconds!</p>
     </div>
   )
 }
@@ -640,7 +640,7 @@ let locations = [{
             {
               "left": 560,
               "top": 420
-            },
+            }
 ]
 
 function Experiment() {
@@ -652,10 +652,9 @@ function Experiment() {
     if (trial){
       //Random locations
       let slots = []
-      for (var i=0;i<=locations.length;i++) {
+      for (var i=0;i<locations.length;i++) {
         slots.push(i);
       }
-      console.log(slots)
       let d1a_slot_ind = slots.splice(Math.floor(Math.random()*slots.length), 1)[0]
       let d1b_slot_ind = slots.splice(Math.floor(Math.random()*slots.length), 1)[0]
       let d1c_slot_ind = slots.splice(Math.floor(Math.random()*slots.length), 1)[0]
@@ -667,7 +666,6 @@ function Experiment() {
       let d2d_slot_ind = slots.splice(Math.floor(Math.random()*slots.length), 1)[0]
       let d2e_slot_ind = slots.splice(Math.floor(Math.random()*slots.length), 1)[0]
       let target_slot_ind = slots.splice(Math.floor(Math.random()*slots.length), 1)[0]
-
       let d1a_slot = locations[d1a_slot_ind]
       let d1b_slot = locations[d1b_slot_ind]
       let d1c_slot = locations[d1c_slot_ind]
@@ -679,7 +677,6 @@ function Experiment() {
       let d2d_slot = locations[d2d_slot_ind]
       let d2e_slot = locations[d2e_slot_ind]
       let target_slot = locations[target_slot_ind]
-      console.log(d1a_slot)
       let start = Date.now();
       return (
         <div style = {{justifyContent: 'center', width: '600px'}}>
@@ -740,7 +737,6 @@ function Experiment() {
     } else {
       //Are we finished all the trials? If not, keep going!
       if (curTrial < numTrials) {
-        console.log("here")
         //Return reset screen
         return (
         <div style = {{justifyContent: 'center', width: '600px'}}>
