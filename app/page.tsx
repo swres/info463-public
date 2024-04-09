@@ -85,7 +85,7 @@ export default function Home() {
           <h2>
             Lab 5 <span>-&gt;</span>
           </h2>
-          <p>Building a chat bot</p>
+          <p>Evaluating text entry</p>
         </a>
 
         <a
