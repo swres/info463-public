@@ -20,7 +20,7 @@ export default function Lab4() {
         <h2>Lab 4: Conjunctive Search</h2>
         <p>In this week's lab, you will designing the most difficult search task you can:</p>
         <ol>
-          <li>Use the options below to adjust the features of both the target and the distractors for this experiment. You get two types of distractors to use. You may NOT make them identical (that would be cheating!)
+          <li>Use the options below to adjust the features of both the target and the distractors for this experiment. You get two types of distractors to use. You may NOT make them identical to your target(that would be cheating!)
           </li>
           <li>Swap with a classmate, and have them try your search task. Make note of their time. Whose was more difficult? Why?
           </li>

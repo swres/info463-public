@@ -22,7 +22,7 @@ export default function Lab3() {
         <p>Once you've done that, answer the following questions:</p>
         <ol>
           <li>Which two devices (or sensitivities, or hands, etc) did you pick?</li>
-          <li>How did your results compare between the two? Consider throughput (speed) and accuracy/error rate for both pointing and steering tasks.</li>
+          <li>How did your results compare between the two? Consider throughput (or speed) and accuracy/error rate for both pointing and steering tasks.</li>
           <li>Pick <b>at least one</b> additional variable you might test when comparing pointing devices (that is, something besides speed or accuracy). How might you test it?</li>
         </ol>
       </div>
