@@ -115,11 +115,9 @@ function MSDExperiment() {
     } else {
       msd_data.push({time: Date.now() - msd_start, character: event.key})
     }
-    console.log(msd_data)
   };
   const handleMSDChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let newValue = (event.target as HTMLInputElement).value
-    console.log(newValue)
     setMSDInput(newValue)
   };
 
@@ -178,14 +176,11 @@ function MSDExperiment() {
 function KSPCResults() {
   let total_time = 0
   let total_chars = target_string.length*num_trials
-  console.log(kspc_trials)
-  console.log(total_chars)
   let total_ks = 0
   for (let i = 0; i < kspc_trials.length; i++) {
     total_time += kspc_trials[i].data[kspc_trials[i].data.length-1].time
     total_ks += kspc_trials[i].ks
   }
-  console.log(total_ks)
   let wpm = ((total_chars - 1)/(total_time/1000))*60*(1/5)
   let kspc = total_chars / total_ks
   return (
@@ -202,7 +197,6 @@ function KSPCExperiment() {
   const [kspcInput, setKSPCInput] = useState("");
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    console.log(keystrokes)
     if (event.key === 'Enter') {
       event.preventDefault();
       if (kspcInput == target_string) {
