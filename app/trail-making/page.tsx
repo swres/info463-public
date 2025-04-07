@@ -20,14 +20,14 @@ export default function TrailMakingTask() {
 
 function TrailMakingExperiment() {
   const totalCircles = 13;
-  const [positions, setPositions] = useState([]);
+  const [positions, setPositions] = useState<{ x: number; y: number}[]>([]);
   const [startTime, setStartTime] = useState<number | null>(null);
   const [endTime, setEndTime] = useState<number | null>(null);
   const [current, setCurrent] = useState(1);
   const [complete, setComplete] = useState(false);
 
   useEffect(() => {
-    const newPositions = [];
+    const newPositions: { x: number; y: number; }[] = [];
     const radius = 30;
     const spacing = 100;
     const width = 600;
