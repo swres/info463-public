@@ -125,15 +125,15 @@ export default function Home() {
         </a>
 
         <a
-          href="lab9"
+          href="trail-making"
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
         >
           <h2>
-            Lab 9 <span>-&gt;</span>
+            Trail Making Task <span>-&gt;</span>
           </h2>
-          <p>Using your voice</p>
+          <p>How fast can you do it?</p>
         </a>
 
         <a

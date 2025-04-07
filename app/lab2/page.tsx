@@ -94,54 +94,6 @@ function ExpOptions(){
     <p>Trial {curTrial} out of {numTrials}</p>
     </div>
   )
-  /*
-  return (
-    <div>
-      <h3>Size range for targets</h3>
-      <Box sx={{ width: 300 }}>
-      <Slider
-        getAriaLabel={() => 'Size range'}
-        value={sizes}
-        onChange={handleSize}
-        valueLabelDisplay="auto"
-      />
-      </Box>
-      <div style = {{position: 'relative', height: '100px'}}>
-        <div style = {{width: `${sizes[0]}px`, height: `${sizes[0]}px`, background: 'black', position: 'absolute'}}></div>
-        <div style = {{width: `${sizes[1]}px`, height: `${sizes[1]}px`, background: 'black', position: 'absolute', right: '0px'}}></div>
-      </div>
-
-      <h3>Distance range for targets</h3>
-      <Box sx={{ width: 300 }}>
-        <Slider
-        getAriaLabel={() => 'Distance range'}
-        value={dists}
-        onChange={handleDist}
-        valueLabelDisplay="auto"
-        min = {30}
-        max = {450}
-        />
-      </Box>
-
-      <div style = {{position: 'relative', height: '100px'}}>
-        <div style = {{width: `${dists[0]}px`, height: `10px`, background: 'black'}}></div>
-        <br></br>
-        <div style = {{width: `${dists[1]}px`, height: `10px`, background: 'black', position: 'absolute'}}></div>
-      </div>
-
-      <h3>Number of trials</h3>
-      <Box sx={{ width: 300 }}>
-      <Slider
-        getAriaLabel={() => 'Number of trials'}
-        value={numberTrials}
-        onChange={handleNumTrials}
-        valueLabelDisplay="auto"
-      />
-    </Box>
-    <p>Trial {curTrial} out of {numTrials}</p>
-    <>Distance range: {minDist} to {maxDist}</>
-    </div>
-  )*/
 }
 
 function Results() {
