@@ -10,7 +10,7 @@ import Keyboard from 'simple-keyboard';
 import 'simple-keyboard/build/css/index.css';
 
 let target_string = "the quick brown fox jumps over the lazy dog"
-let num_trials = 3
+let num_trials = 10
 
 let msd_data : any[] = [];
 let msd_start = Date.now();
